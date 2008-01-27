@@ -1,0 +1,31 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                addFlurry = id; 
+                deleteFlurry = id; 
+                displayReadMe = id; 
+                saveAndCloseSheet = id; 
+                somethingChanged = id; 
+                testNow = id; 
+            }; 
+            CLASS = FlurryView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                colourMenu = id; 
+                flurryTable = id; 
+                presetMenuSpace = NSView; 
+                randomDisplayCheckbox = id; 
+                randomPresetCheckbox = id; 
+                speedSlider = id; 
+                streamCountSlider = id; 
+                thicknessSlider = id; 
+                window = id; 
+            }; 
+            SUPERCLASS = ScreenSaverView; 
+        }, 
+        {CLASS = ScreenSaverView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}

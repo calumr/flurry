@@ -1,0 +1,27 @@
+Author: Brian Wade
+Email: brianwade@va.prestige.net
+Homepage:
+Visual Effect's Name: Seraphim
+Description: Deep space swirly plasma thingy screeensaver
+
+32 Bit color recommended.  Really, I mean it!
+
+The name of this project refers to a version of this that underwent a big change about 2 days ago.  It doesn't totally apply anymore, but it doesn't suck and I couldn't think of a name I liked better. Oh well...
+
+Important note:
+
+This is a Windows screensaver and not a regular .exe (sorry for you non-Windows users)
+
+To start it in default mode double-click on Serphim.scr
+
+To fiddle with the settings right-click on Serphim.scr and choose Configure.  The parameter space is absolutely huge (37794129607309529049756987379698040896 combinations, give or take a couple)
+
+To make this your screensaver (with preview, password control, etc.) right-click on Serphim.scr and choose Install.  If you want to keep it forever, you can move it to your system directory so Windows can find it next time you change screensavers.
+
+Input:
+
+The left mouse button acts like an attractor, click and drag to swirl the plasma.  Just about any other input exits the program.
+
+After running configure, this program writes settings to Seraphim.ini.  (Bold programmer types can extend the parameter space by directly editing this file, just in case 37794129607309529049756987379698040896 different settings aren't enough to explore)
+
+Sorry about the Frankenstein-like job of cutting and pasting the code together from bits and pieces of old dead code, but I was in a hurry :)
