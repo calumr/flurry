@@ -471,7 +471,7 @@ __private_extern__ double CurrentTime(void)
 	
 	if (self = [super initImageCell:image])
 	{
-		index = [[newIndex copy] retain];
+		index = [newIndex retain];
 	}
 	[image release];
 	return self;
