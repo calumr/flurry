@@ -8,11 +8,11 @@
  */
 
 #include <Texture.h>
+#include <PTypes.h>
 
 #import <OpenGL/gl.h>
 #import <OpenGL/glu.h>
 
-#include <c.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -61,14 +61,14 @@ static void SpeckleTexture()
             speck = 1;
             while (speck <= 32 && rand() % 2)
             {
-                t = (float) MIN(255,smallTextureArray[i][j]+speck);
+                t = (float) min(255,smallTextureArray[i][j]+speck);
                 smallTextureArray[i][j] = (GLubyte) t;
                 speck+=speck;
             }
             speck = 1;
             while (speck <= 32 && rand() % 2)
             {
-                t = (float) MAX(0,smallTextureArray[i][j]-speck);
+                t = (float) max(0,smallTextureArray[i][j]-speck);
                 smallTextureArray[i][j] = (GLubyte) t;
                 speck+=speck;
             }
@@ -116,7 +116,7 @@ static void MakeSmallTexture()
                 {
                     t = 255.0f * (float) cos(r*M_PI/31.0);
                 }
-                smallTextureArray[i][j] = (GLubyte) MIN(255,(t+smallTextureArray[i][j]+smallTextureArray[i][j])/3);
+                smallTextureArray[i][j] = (GLubyte) min(255,(t+smallTextureArray[i][j]+smallTextureArray[i][j])/3);
             }
         }
     }
@@ -147,7 +147,7 @@ static void AverageLastAndFirstTextures()
         for (j=0;j<32;j++)
         {
             t = (smallTextureArray[i][j] + bigTextureArray[i][j][0]) / 2;
-            smallTextureArray[i][j] = (GLubyte) MIN(255,t);
+            smallTextureArray[i][j] = (GLubyte) min(255,t);
         }
     }
 }
