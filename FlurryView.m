@@ -263,7 +263,7 @@ __private_extern__ double CurrentTime(void)
 {
 	if (flurryTable)
 	{
-		[flurryTable selectRow:0 byExtendingSelection:NO];
+		[flurryTable selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		[self tableViewSelectionDidChange:NULL];
 	}
 	[self stopAnimation];
