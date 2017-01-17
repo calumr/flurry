@@ -76,15 +76,15 @@ typedef struct global_info_t {
         int optMode;
 } global_info_t;
 
-__private_extern__ global_info_t *info;
+extern global_info_t *info;
 
 #define kNumSpectrumEntries 512
 
-__private_extern__ void OTSetup();
-__private_extern__ double TimeInSecondsSinceStart();
+void OTSetup();
+double TimeInSecondsSinceStart();
 
-__private_extern__ void GLSetupRC(void);
-__private_extern__ void GLRenderScene(void);
-__private_extern__ void GLResize(float w, float h);
+void GLSetupRC(void);
+void GLRenderScene(void);
+void GLResize(float w, float h);
 
 #endif // Include/Define

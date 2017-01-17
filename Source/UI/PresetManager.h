@@ -5,7 +5,7 @@
 - (void)selectedPresetDidChange;
 @end
 
-@interface PresetManager : NSObject
+@interface PresetManager : NSObject <NSCollectionViewDataSource>
 {
     NSMutableArray *presets;
 	FlurryPreset *currentPreset, *viewPreset;

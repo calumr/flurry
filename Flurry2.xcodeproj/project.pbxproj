@@ -33,6 +33,10 @@
 		E4DA17511E2E953400F80879 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DA174B1E2E946700F80879 /* InfoPlist.strings */; };
 		E4DA17761E2E9F1400F80879 /* EditPreset.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17721E2E9F1400F80879 /* EditPreset.xib */; };
 		E4DA17771E2E9F1400F80879 /* Flurry.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17741E2E9F1400F80879 /* Flurry.xib */; };
+		E4DA177B1E2EABE600F80879 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DA17791E2EAABD00F80879 /* GLKit.framework */; };
+		E4DA177D1E2EACFF00F80879 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DA177C1E2EACFF00F80879 /* OpenGL.framework */; };
+		E4DA177F1E2EAD0900F80879 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DA177E1E2EAD0900F80879 /* Cocoa.framework */; };
+		E4DA17811E2EAD1700F80879 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DA17801E2EAD1700F80879 /* ScreenSaver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		E4DA174C1E2E946700F80879 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		E4DA17731E2E9F1400F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/EditPreset.xib; sourceTree = SOURCE_ROOT; };
 		E4DA17751E2E9F1400F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Flurry.xib; sourceTree = SOURCE_ROOT; };
+		E4DA17791E2EAABD00F80879 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		E4DA177C1E2EACFF00F80879 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E4DA177E1E2EAD0900F80879 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		E4DA17801E2EAD1700F80879 /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DA17811E2EAD1700F80879 /* ScreenSaver.framework in Frameworks */,
+				E4DA177F1E2EAD0900F80879 /* Cocoa.framework in Frameworks */,
+				E4DA177D1E2EACFF00F80879 /* OpenGL.framework in Frameworks */,
+				E4DA177B1E2EABE600F80879 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +95,7 @@
 				E4DA17111E2E944C00F80879 /* Resources */,
 				E4DA17151E2E944C00F80879 /* Source */,
 				E4DA16FB1E2E938F00F80879 /* Products */,
+				E4DA17781E2EAABD00F80879 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +162,17 @@
 				E4DA172D1E2E944C00F80879 /* PresetManager.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		E4DA17781E2EAABD00F80879 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4DA17801E2EAD1700F80879 /* ScreenSaver.framework */,
+				E4DA177E1E2EAD0900F80879 /* Cocoa.framework */,
+				E4DA177C1E2EACFF00F80879 /* OpenGL.framework */,
+				E4DA17791E2EAABD00F80879 /* GLKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				PRODUCT_BUNDLE_IDENTIFIER = com.calumr.Flurry;
@@ -394,6 +419,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				PRODUCT_BUNDLE_IDENTIFIER = com.calumr.Flurry;

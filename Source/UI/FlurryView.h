@@ -4,7 +4,7 @@
 #import "FlurryUtils.h"
 #import "PresetManager.h"
 
-@interface FlurryView : ScreenSaverView
+@interface FlurryView : ScreenSaverView <NSTableViewDataSource, NSTableViewDelegate>
 {
     NSOpenGLView *_glView;
     BOOL randomisePreset, randomiseDisplay;

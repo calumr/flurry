@@ -29,7 +29,7 @@
 - (void)randomiseDisplays:(BOOL)goRandom;
 
 - (void)setDraws:(BOOL)doesDraw onScreen:(int)screen;
-- (BOOL)shouldDrawOnScreenIndex:(int)index randomise:(BOOL)randomise;
+- (BOOL)shouldDrawOnScreenIndex:(NSUInteger)index randomise:(BOOL)randomise;
 - (BOOL)shouldDrawOnScreen:(NSScreen *)screen randomise:(BOOL)randomise;
 - (BOOL)shouldDrawInView:(NSView *)view randomise:(BOOL)randomise;
 @end

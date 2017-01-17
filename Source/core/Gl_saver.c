@@ -1,6 +1,5 @@
-#include <Carbon/Carbon.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#import <GLKit/GLKit.h>
+#import <OpenGL/gl.h>
 #include <sys/time.h>
 #include <sys/sysctl.h>
 
@@ -13,19 +12,19 @@
 
 // some globals
 //long TimeFreq, TimeStart;
-__private_extern__ global_info_t *info = NULL;
+global_info_t *info = NULL;
 
 
 // MDT The following few lines simulate the ppc-specific time stuff above.
-__private_extern__ double CurrentTime(void);
+double CurrentTime(void);
 
 static double gTimeCounter = 0.0;
-__private_extern__ void OTSetup (void) {
+void OTSetup (void) {
     if (gTimeCounter == 0.0) {
         gTimeCounter = CurrentTime();
     }
 }
-__private_extern__ double TimeInSecondsSinceStart (void) {
+double TimeInSecondsSinceStart (void) {
     return CurrentTime() - gTimeCounter;
 }
 
@@ -33,13 +32,6 @@ __private_extern__ double TimeInSecondsSinceStart (void) {
 // http://developer.apple.com/hardware/ve/g3_compatibility.html
 static Boolean IsAltiVecAvailable( void )
 {
-    int selectors[2] = { CTL_HW, HW_VECTORUNIT };
-    int hasVectorUnit = 0;
-    size_t length = sizeof(hasVectorUnit);
-    int error = sysctl(selectors, 2, &hasVectorUnit, &length, NULL, 0);
-
-    if( 0 == error ) return hasVectorUnit != 0;
-
     return FALSE;
 
 }
@@ -49,7 +41,7 @@ static Boolean IsAltiVecAvailable( void )
 // Do any initialization of the rendering context here, such as
 // setting background colors, setting up lighting, or performing
 // preliminary calculations.
-__private_extern__ void GLSetupRC(void)
+void GLSetupRC(void)
 {
     int i,k;
     
@@ -87,7 +79,8 @@ __private_extern__ void GLSetupRC(void)
     glViewport(0,0,(int) info->sys_glWidth,(int) info->sys_glHeight);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0,info->sys_glWidth,0,info->sys_glHeight);
+    GLKMatrix4 orthoMat = GLKMatrix4MakeOrtho(0,info->sys_glWidth,0,info->sys_glHeight, 0.0, 1.0);
+    glLoadMatrixf(orthoMat.m);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 	
@@ -100,18 +93,14 @@ __private_extern__ void GLSetupRC(void)
     
     info->fOldTime = TimeInSecondsSinceStart() + info->flurryRandomSeed;
 
-#ifdef __VEC__
     info->optMode = IsAltiVecAvailable() ? OPT_MODE_VECTOR_UNROLLED : OPT_MODE_SCALAR_BASE;
-#else
-    info->optMode = OPT_MODE_SCALAR_BASE;
-#endif //__VEC__    
 }
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 // Render the OpenGL Scene here. Called by the WM_PAINT message
 // handler.
-__private_extern__ void GLRenderScene(void)
+void GLRenderScene(void)
 {
     int i;
     
@@ -173,7 +162,7 @@ __private_extern__ void GLRenderScene(void)
     glDisable(GL_TEXTURE_2D);
 }
 
-__private_extern__ void GLResize(float w, float h)
+void GLResize(float w, float h)
 {
     info->sys_glWidth = w;
     info->sys_glHeight = h;

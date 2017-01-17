@@ -195,19 +195,19 @@
 		
 		for (i=0;i<MAXNUMPARTICLES;i++)
 		{
-			flurry_info->p[i] = malloc(sizeof(Particle));
+			flurry_info->p[i] = (Particle *)malloc(sizeof(Particle));
 		}
 		
-		flurry_info->s = malloc(sizeof(SmokeV));
+		flurry_info->s = (SmokeV *)malloc(sizeof(SmokeV));
 		InitSmoke(flurry_info->s);
 		
-		flurry_info->star = malloc(sizeof(Star));
+		flurry_info->star = (Star *)malloc(sizeof(Star));
 		InitStar(flurry_info->star);
 		flurry_info->star->rotSpeed = 1.0;
 		
 		for (i=0;i<64;i++)
 		{
-			flurry_info->spark[i] = malloc(sizeof(Spark));
+			flurry_info->spark[i] = (Spark *)malloc(sizeof(Spark));
 			InitSpark(flurry_info->spark[i]);
 		}
 	}
@@ -308,11 +308,11 @@
 	screens = (screens & (~(1<<screen))) ^ ((doesDraw?1:0)<<screen);
 }
 
-- (BOOL)shouldDrawOnScreenIndex:(int)index randomise:(BOOL)randomise {
+- (BOOL)shouldDrawOnScreenIndex:(NSUInteger)index randomise:(BOOL)randomise {
 	return (randomise ? randomFactor : screens) & 1<<index;
 }
 - (BOOL)shouldDrawOnScreen:(NSScreen *)screen randomise:(BOOL)randomise {
-	int index = [[NSScreen screens] indexOfObject:screen];
+	NSUInteger index = [[NSScreen screens] indexOfObject:screen];
 	return [self shouldDrawOnScreenIndex:index randomise:randomise];
 }
 - (BOOL)shouldDrawInView:(NSView *)view randomise:(BOOL)randomise{

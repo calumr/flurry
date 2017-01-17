@@ -18,7 +18,7 @@
 
 static GLubyte smallTextureArray[32][32];
 static GLubyte bigTextureArray[256][256][2];
-__private_extern__  GLuint theTexture = 0;
+GLuint theTexture = 0;
 
 // simple smoothing routine
 static void SmoothTexture()
@@ -152,7 +152,7 @@ static void AverageLastAndFirstTextures()
     }
 }
 
-__private_extern__ void MakeTexture(void)
+void MakeTexture(void)
 {
     int i,j;
     for (i=0;i<8;i++)

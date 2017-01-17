@@ -7,11 +7,6 @@
 #define MAXANGLES 16384
 extern int theTexture;
 
-// used to compute the min and max of two expresions
-#define MIN(a, b)  (((a) < (b)) ? (a) : (b)) 
-#define MAX(a, b)  (((a) > (b)) ? (a) : (b)) 
-
-
 
 __private_extern__ void DrawParticle(Particle *p) // the math was easier in 2D - so 2D it is
 {
@@ -64,7 +59,7 @@ __private_extern__ void DrawParticle(Particle *p) // the math was easier in 2D -
         float dx = (screenx-oldscreenx);
         float dy = (screeny-oldscreeny);
         float m = FastDistance2D(dx, dy);
-        float u0 = (p->animFrame&&7) * 0.125f;
+        float u0 = (p->animFrame) * 0.125f;
         float v0 = (p->animFrame>>3) * 0.125f;
         float u1 = u0 + 0.125f;
         float v1 = v0 + 0.125f;

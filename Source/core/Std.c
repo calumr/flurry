@@ -40,5 +40,5 @@ __private_extern__ inline vector float FastDistance2DV(vector float x, vector fl
     return temp;
 }
 
-#endif __VEC__
+#endif //__VEC__
 

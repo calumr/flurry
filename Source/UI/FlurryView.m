@@ -16,12 +16,6 @@ __private_extern__ double CurrentTime(void)
     return time.tv_sec + (time.tv_usec / 1000000.0); 
 }
 
-@interface MonitorCell : NSImageCell {
-	NSString *index;
-}
-- (id)initWithIndex:(NSString *)newIndex;
-@end
-
 @implementation FlurryView
 
 + (void)initialize
@@ -179,7 +173,7 @@ __private_extern__ double CurrentTime(void)
 
 - (NSWindow*)configureSheet
 {
-	[NSBundle loadNibNamed:@"Flurry.nib" owner:self];
+	[[NSBundle mainBundle] loadNibNamed:@"Flurry.nib" owner:self topLevelObjects:nil];
 	
 	if (randomisePreset)
 	{
@@ -201,32 +195,7 @@ __private_extern__ double CurrentTime(void)
 	[flurryTable setDataSource:self];
 	[flurryTable setDelegate:self];
 	
-	[[flurryTable delegate] tableViewSelectionDidChange:NULL];
-	
-	//if ([[NSScreen screens] count] > 1)
-	{
-		int i;
-		NSButtonCell *checkBox = [[NSButtonCell alloc] init];
-		[checkBox setButtonType:NSSwitchButton];
-		[checkBox setTitle:@""];
-#if 0
-		for (i=0;i<3;i++)	// test table with 3 monitors attached
-#else
-		for (i=0;i<[[NSScreen screens] count];i++)
-#endif
-		{
-			NSString *n = [[NSNumber numberWithInt:(i + 1)] stringValue];
-			NSTableColumn *tc = [[NSTableColumn alloc] initWithIdentifier:n];
-			MonitorCell *monitorCell = [[MonitorCell alloc] initWithIndex:[NSString stringWithFormat:@"%d", i]];
-			[tc setWidth:30];
-			[tc setDataCell:checkBox];
-			//[[tc headerCell] setTitle:n];
-			[tc setHeaderCell:monitorCell];
-			[tc setResizingMask:NSTableColumnNoResizing];
-			[tc setEditable:YES];
-			[flurryTable addTableColumn:tc];
-		}
-	}
+	[self tableViewSelectionDidChange:NULL];
 	
 	[[flurryTable tableColumnWithIdentifier:@"colour"] setDataCell:[[ColourCell alloc] init]];
 	
@@ -344,7 +313,7 @@ __private_extern__ double CurrentTime(void)
 			[[presetManager currentPreset] deleteFlurry:[toDelete objectAtIndex:i]];
 		
 		[flurryTable reloadData];
-		[[flurryTable delegate] tableViewSelectionDidChange:NULL];
+		[self tableViewSelectionDidChange:nil];
 	}
 	else
 		NSBeep();
@@ -389,48 +358,36 @@ __private_extern__ double CurrentTime(void)
 	[NSApp endSheet:window];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 	return [[[presetManager currentPreset] flurries] count];
 }
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
 	Flurry *flurry;
-	int screenIndex;
 	
 	NSParameterAssert(row >= 0 && row < [[[presetManager currentPreset] flurries] count]);
 	
 	flurry = [[[presetManager currentPreset] flurries] objectAtIndex:row];
 	
-	if (screenIndex = [[tableColumn identifier] intValue])
-	{
-		return [NSNumber numberWithBool:[flurry shouldDrawOnScreenIndex:(screenIndex - 1) randomise:FALSE]];
-	}
-	else
-		return [flurry valueForKey:[tableColumn identifier]];
+    return [flurry valueForKey:[tableColumn identifier]];
 }
 
-- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
 	Flurry *flurry;
-	int screenIndex;
-	
+
 	NSParameterAssert(row >= 0 && row < [[[presetManager currentPreset] flurries] count]);
 	
 	flurry = [[[presetManager currentPreset] flurries] objectAtIndex:row];
 	
-	if (screenIndex = [[tableColumn identifier] intValue])
-	{
-		[flurry setDraws:[object boolValue] onScreen:(screenIndex - 1)];
-	}
-	else
-		[flurry takeValue:object forKey:[tableColumn identifier]];
+	[flurry setValue:object forKey:[tableColumn identifier]];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-	int selection = [flurryTable selectedRow];
+	NSInteger selection = [flurryTable selectedRow];
 	
 	NSParameterAssert(selection >= 0 && selection < [[[presetManager currentPreset] flurries] count]);
 	
@@ -445,34 +402,6 @@ __private_extern__ double CurrentTime(void)
 		[thicknessSlider setFloatValue:sqrt(info->streamExpansion)];
 		[speedSlider setFloatValue:info->star->rotSpeed];
 	}
-}
-
-@end
-
-@implementation MonitorCell
-
-- (id)initWithIndex:(NSString *)newIndex
-{
-	NSString *path = [[NSBundle bundleForClass:[FlurryView class]] pathForImageResource:@"displays"];
-	NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
-	
-	if (self = [super initImageCell:image])
-	{
-		index = newIndex;
-	}
-
-	return self;
-}
-
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	NSPoint point = cellFrame.origin;
-	point.x += 13;
-	point.y += 4;
-	[super drawInteriorWithFrame:NSOffsetRect(cellFrame, 0, 1) inView:controlView];
-	[index drawAtPoint:point withAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-			[NSColor whiteColor], NSForegroundColorAttributeName, 
-			[NSFont systemFontOfSize:8], NSFontAttributeName, NULL]];
 }
 
 @end

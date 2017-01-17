@@ -981,7 +981,7 @@ __private_extern__ void DrawSmoke_Scalar(SmokeV *s)
 					s->p[i].animFrame.i[k] = 0;
 				}
 		
-				u0 = (s->p[i].animFrame.i[k]&&7) * 0.125f;
+				u0 = (s->p[i].animFrame.i[k]) * 0.125f;
 				v0 = (s->p[i].animFrame.i[k]>>3) * 0.125f;
 				u1 = u0 + 0.125f;
 				v1 = v0 + 0.125f;

@@ -14,8 +14,8 @@
 // named 'theTexture', and is used exclusively by the Windows code.
 
 // Here's the global texture variable
-__private_extern__ GLuint theTexture;
+extern GLuint theTexture;
 
 // MakeTexture is a big do-all function that creates the textures and initializes
 // the 'theTexture' global variable.
-__private_extern__ void MakeTexture(void);
+extern void MakeTexture(void);

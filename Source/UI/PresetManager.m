@@ -40,8 +40,8 @@
 		}
 		else
 		{
-			int index = [defaults integerForKey:@"viewPresetIndex"];
-			if (index >=0 && index < [presets count])
+			NSInteger index = [defaults integerForKey:@"viewPresetIndex"];
+			if (index >= 0 && index < [presets count])
 				currentPreset = [presets objectAtIndex:index];
 			else
 				currentPreset = [presets objectAtIndex:0];	// will never have 0 items - so this is OK
@@ -106,7 +106,7 @@
 - (void)loadNibIfNeeded
 {
 	if (!nibLoaded)
-		[NSBundle loadNibNamed:@"EditPreset.nib" owner:self];
+        [[NSBundle mainBundle] loadNibNamed:@"EditPreset.nib" owner:self topLevelObjects:nil];
 	
 	[presetTable setDataSource:self];
 	[presetTable setDelegate:self];
@@ -176,9 +176,7 @@
 {
 	if ([presetTable numberOfSelectedRows] < [presets count])
 	{
-		int i;
-		
-		i = [presets count];
+		NSUInteger i = [presets count];
 		
 		// do it backwards (so we don't modify indexes of object we are about to delete)
 		while (i--)
@@ -235,7 +233,7 @@
 	[self refreshMenu];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSUInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 	return [presets count];
 }
@@ -249,7 +247,7 @@
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row
 {
 	NSParameterAssert(row >= 0 && row < [presets count]);
-	[[presets objectAtIndex:row] takeValue:object forKey:[tableColumn identifier]];
+	[[presets objectAtIndex:row] setValue:object forKey:[tableColumn identifier]];
 }
 
 @end
