@@ -16,7 +16,7 @@ __private_extern__ double CurrentTime(void)
     return time.tv_sec + (time.tv_usec / 1000000.0); 
 }
 
-@interface MonitorCell : NSTableHeaderCell {
+@interface MonitorCell : NSImageCell {
 	NSString *index;
 }
 - (id)initWithIndex:(NSString *)newIndex;
@@ -44,9 +44,9 @@ __private_extern__ double CurrentTime(void)
                         //NSOpenGLPFAClosestPolicy,
                         0
             };
-        NSOpenGLPixelFormat *format = [[[NSOpenGLPixelFormat alloc] initWithAttributes:attribs] autorelease];
+        NSOpenGLPixelFormat *format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attribs];
         
-        _glView = [[[FlurryOpenGLView alloc] initWithFrame:NSZeroRect pixelFormat:format] autorelease];
+        _glView = [[FlurryOpenGLView alloc] initWithFrame:NSZeroRect pixelFormat:format];
         [self addSubview:_glView];
 		
 		garbageHack = YES;
@@ -66,8 +66,6 @@ __private_extern__ double CurrentTime(void)
 - (void)dealloc
 {
     [_glView removeFromSuperview];
-    [presetManager release];
-    [super dealloc];
 }
 
 - (void)setFrameSize:(NSSize)newSize
@@ -219,7 +217,7 @@ __private_extern__ double CurrentTime(void)
 		{
 			NSString *n = [[NSNumber numberWithInt:(i + 1)] stringValue];
 			NSTableColumn *tc = [[NSTableColumn alloc] initWithIdentifier:n];
-			MonitorCell *monitorCell = [[MonitorCell alloc] initWithIndex:i];
+			MonitorCell *monitorCell = [[MonitorCell alloc] initWithIndex:[NSString stringWithFormat:@"%d", i]];
 			[tc setWidth:30];
 			[tc setDataCell:checkBox];
 			//[[tc headerCell] setTitle:n];
@@ -234,10 +232,10 @@ __private_extern__ double CurrentTime(void)
 	
 	[flurryTable sizeLastColumnToFit];
 	
-	tableRefreshTimer = [[NSTimer scheduledTimerWithTimeInterval:COLOUR_REFRESH_INTERVAL 
+	tableRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:COLOUR_REFRESH_INTERVAL
 							target:self
 							selector:@selector(refreshColours:)
-							userInfo:NULL repeats:YES] retain];
+							userInfo:NULL repeats:YES];
 	
     return window;
 }
@@ -324,8 +322,6 @@ __private_extern__ double CurrentTime(void)
 	for (i=0;i<[newFlurries count];i++)
 		[[presetManager currentPreset] addFlurry:[newFlurries objectAtIndex:i]];
 	
-	[newFlurries release];
-	
 	[flurryTable reloadData];
 }
 
@@ -346,8 +342,6 @@ __private_extern__ double CurrentTime(void)
 		
 		for (i=0;i<[toDelete count];i++)
 			[[presetManager currentPreset] deleteFlurry:[toDelete objectAtIndex:i]];
-		
-		[toDelete release];
 		
 		[flurryTable reloadData];
 		[[flurryTable delegate] tableViewSelectionDidChange:NULL];
@@ -391,7 +385,6 @@ __private_extern__ double CurrentTime(void)
 {
 	[[self window] makeFirstResponder:nil];
 	[tableRefreshTimer invalidate];
-	[tableRefreshTimer release];
 	[self writeDefaults];
 	[NSApp endSheet:window];
 }
@@ -458,12 +451,6 @@ __private_extern__ double CurrentTime(void)
 
 @implementation MonitorCell
 
-- (void)dealloc
-{
-	[index release];
-	[super dealloc];
-}
-
 - (id)initWithIndex:(NSString *)newIndex
 {
 	NSString *path = [[NSBundle bundleForClass:[FlurryView class]] pathForImageResource:@"displays"];
@@ -471,9 +458,9 @@ __private_extern__ double CurrentTime(void)
 	
 	if (self = [super initImageCell:image])
 	{
-		index = [newIndex retain];
+		index = newIndex;
 	}
-	[image release];
+
 	return self;
 }
 

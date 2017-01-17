@@ -104,7 +104,7 @@ __private_extern__ void GLSetupRC(void)
     info->optMode = IsAltiVecAvailable() ? OPT_MODE_VECTOR_UNROLLED : OPT_MODE_SCALAR_BASE;
 #else
     info->optMode = OPT_MODE_SCALAR_BASE;
-#endif __VEC__    
+#endif //__VEC__    
 }
 
 //////////////////////////////////////////////////////////////////
@@ -139,7 +139,7 @@ __private_extern__ void GLRenderScene(void)
     case OPT_MODE_SCALAR_FRSQRTE:
         UpdateSmoke_ScalarFrsqrte(info->s);
         break;
-#endif __ppc__
+#endif //__ppc__
 #ifdef __VEC__
     case OPT_MODE_VECTOR_SIMPLE:
         UpdateSmoke_VectorBase(info->s);
@@ -147,7 +147,7 @@ __private_extern__ void GLRenderScene(void)
     case OPT_MODE_VECTOR_UNROLLED:
         UpdateSmoke_VectorUnrolled(info->s);
         break;
-#endif __VEC__
+#endif //__VEC__
     default:
         break;
     }
@@ -165,7 +165,7 @@ __private_extern__ void GLRenderScene(void)
     case OPT_MODE_VECTOR_UNROLLED:
 		DrawSmoke_Vector(info->s);
         break;
-#endif __VEC__
+#endif //__VEC__
     default:
         break;
     }    

@@ -9,7 +9,7 @@
 	[fp setName:@"Classic Flurry"];
 	[fp setShortcut:@"1"];
 	[fp addFlurry:[[Flurry alloc] init]];
-	return [fp autorelease];
+	return fp;
 }
 
 + (FlurryPreset *)rgbFlurryPreset
@@ -20,7 +20,7 @@
 	[fp addFlurry:[Flurry flurryWithStreams:3 colour:redColorMode thickness:100.0 speed:0.8]];
 	[fp addFlurry:[Flurry flurryWithStreams:3 colour:greenColorMode thickness:100.0 speed:0.8]];
 	[fp addFlurry:[Flurry flurryWithStreams:3 colour:blueColorMode thickness:100.0 speed:0.8]];
-	return [fp autorelease];
+	return fp;
 }
 
 + (FlurryPreset *)waterFlurryPreset
@@ -37,7 +37,7 @@
 	[fp addFlurry:[Flurry flurryWithStreams:1 colour:blueColorMode thickness:100.0 speed:2.0]];
 	[fp addFlurry:[Flurry flurryWithStreams:1 colour:blueColorMode thickness:100.0 speed:2.0]];
 	[fp addFlurry:[Flurry flurryWithStreams:1 colour:blueColorMode thickness:100.0 speed:2.0]];
-	return [fp autorelease];
+	return fp;
 }
 
 + (FlurryPreset *)fireFlurryPreset
@@ -46,7 +46,7 @@
 	[fp setName:@"Big Flurry"];
 	[fp setShortcut:@"4"];
 	[fp addFlurry:[Flurry flurryWithStreams:12 colour:slowCyclicColorMode thickness:10000.0 speed:0.0]];
-	return [fp autorelease];
+	return fp;
 }
 
 + (FlurryPreset *)psychedelicFlurryPreset
@@ -55,7 +55,7 @@
 	[fp setName:@"Psychedelic"];
 	[fp setShortcut:@"5"];
 	[fp addFlurry:[Flurry flurryWithStreams:10 colour:rainbowColorMode thickness:200.0 speed:2.0]];
-	return [fp autorelease];
+	return fp;
 }
 
 - (id)init
@@ -63,8 +63,8 @@
 	if (self = [super init])
 	{
 		flurries = [[NSMutableArray alloc] init];
-		name = [[@"Flurry Preset" copy] retain];
-		shortcut = [[@"0" copy] retain];
+		name = @"Flurry Preset";
+		shortcut = @"0";
 	}
 	return self;
 }
@@ -94,9 +94,9 @@
 {
 	if (self = [super init])
 	{
-		name = [[coder decodeObject] retain];
-		shortcut = [[coder decodeObject] retain];
-		flurries = [[coder decodeObject] retain];
+        name = [coder decodeObject];
+		shortcut = [coder decodeObject];
+		flurries = [coder decodeObject];
 	}
     return self;
 }
@@ -122,8 +122,7 @@
 - (void)setName:(NSString *)newName {
 	if (name != newName)
 	{
-		[name release];
-		name = [[newName copy] retain];
+		name = newName;
 	}
 }
 
@@ -133,8 +132,7 @@
 - (void)setShortcut:(NSString *)newShortcut {
 	if (shortcut != newShortcut)
 	{
-		[shortcut release];
-		shortcut = [[newShortcut copy] retain];
+		shortcut = newShortcut;
 	}
 }
 
@@ -152,7 +150,7 @@
 	fInfo->streamExpansion = t;
 	fInfo->star->rotSpeed = sp;
 	
-	return [f autorelease];
+	return f;
 }
 
 - (void)dealloc
@@ -177,7 +175,6 @@
 		free(flurry_info);
 	}
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 - (id)init
@@ -257,7 +254,7 @@
 	[coder decodeValueOfObjCType:@encode(int) at:&flurry_info->numStreams];
 	[coder decodeValueOfObjCType:@encode(float) at:&flurry_info->streamExpansion];
 	[coder decodeValueOfObjCType:@encode(float) at:&flurry_info->star->rotSpeed];
-	name = [[coder decodeObject] retain];
+	name = [coder decodeObject];
 	
     return self;
 }
@@ -268,8 +265,7 @@
 - (void)setName:(NSString *)newName {
 	if (name != newName)
 	{
-		[name release];
-		name = [[newName copy] retain];
+		name = newName;
 	}
 }
 

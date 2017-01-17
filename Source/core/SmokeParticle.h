@@ -9,14 +9,14 @@ typedef union {
     float		f[4];
 #if __VEC__
     vector float	v;
-#endif __VEC__
+#endif //__VEC__
 } floatToVector;
 
 typedef union {
     unsigned int	i[4];
 #if __VEC__
     vector unsigned int	v;
-#endif __VEC__
+#endif //__VEC__
 } intToVector;
 
 typedef struct SmokeParticleV  

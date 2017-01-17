@@ -231,8 +231,6 @@
 	else
 		[presets addObject:[FlurryPreset classicFlurryPreset]];
 	
-	[newPresets release];
-	
 	[presetTable reloadData];
 	[self refreshMenu];
 }

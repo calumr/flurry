@@ -320,7 +320,7 @@ __private_extern__ void UpdateSmoke_ScalarFrsqrte(SmokeV *s)
     }
 }
 
-#endif __ppc__
+#endif //__ppc__
 
 #ifdef __VEC__
 
@@ -890,7 +890,7 @@ __private_extern__ void UpdateSmoke_VectorUnrolled(SmokeV *s)
     }
 }
 
-#endif __VEC__
+#endif //__VEC__
 
 __private_extern__ void DrawSmoke_Scalar(SmokeV *s)
 {
@@ -1015,7 +1015,7 @@ __private_extern__ void DrawSmoke_Scalar(SmokeV *s)
                                         sci += 1;
                                     }
                                 }
-#endif 0
+#endif //0
                                 
                                 s->seraphimTextures[sti++] = u0;
                                 s->seraphimTextures[sti++] = v0;
@@ -1392,4 +1392,4 @@ __private_extern__ void DrawSmoke_Vector(SmokeV *s)
     glDrawArrays(GL_QUADS,0,si*4);
 }
 
-#endif __VEC__
+#endif //__VEC__
