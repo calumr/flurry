@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E4DA172E1E2E944C00F80879 /* displays.tif in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17121E2E944C00F80879 /* displays.tif */; };
 		E4DA172F1E2E944C00F80879 /* Flurry2.icns in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17131E2E944C00F80879 /* Flurry2.icns */; };
 		E4DA17311E2E944C00F80879 /* Gl_saver.c in Sources */ = {isa = PBXBuildFile; fileRef = E4DA17171E2E944C00F80879 /* Gl_saver.c */; };
 		E4DA17321E2E944C00F80879 /* Gl_saver.h in Headers */ = {isa = PBXBuildFile; fileRef = E4DA17181E2E944C00F80879 /* Gl_saver.h */; };
@@ -31,14 +30,13 @@
 		E4DA17441E2E944C00F80879 /* FlurryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DA172B1E2E944C00F80879 /* FlurryView.m */; };
 		E4DA17451E2E944C00F80879 /* PresetManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E4DA172C1E2E944C00F80879 /* PresetManager.h */; };
 		E4DA17461E2E944C00F80879 /* PresetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DA172D1E2E944C00F80879 /* PresetManager.m */; };
-		E4DA174D1E2E946700F80879 /* EditPreset.nib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17471E2E946700F80879 /* EditPreset.nib */; };
-		E4DA17501E2E953400F80879 /* Flurry.nib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17491E2E946700F80879 /* Flurry.nib */; };
 		E4DA17511E2E953400F80879 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DA174B1E2E946700F80879 /* InfoPlist.strings */; };
+		E4DA17761E2E9F1400F80879 /* EditPreset.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17721E2E9F1400F80879 /* EditPreset.xib */; };
+		E4DA17771E2E9F1400F80879 /* Flurry.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DA17741E2E9F1400F80879 /* Flurry.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E4DA16FA1E2E938F00F80879 /* Flurry2.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Flurry2.saver; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4DA17121E2E944C00F80879 /* displays.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = displays.tif; sourceTree = "<group>"; };
 		E4DA17131E2E944C00F80879 /* Flurry2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Flurry2.icns; sourceTree = "<group>"; };
 		E4DA17141E2E944C00F80879 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4DA17171E2E944C00F80879 /* Gl_saver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Gl_saver.c; sourceTree = "<group>"; };
@@ -63,9 +61,9 @@
 		E4DA172B1E2E944C00F80879 /* FlurryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryView.m; sourceTree = "<group>"; };
 		E4DA172C1E2E944C00F80879 /* PresetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetManager.h; sourceTree = "<group>"; };
 		E4DA172D1E2E944C00F80879 /* PresetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetManager.m; sourceTree = "<group>"; };
-		E4DA17481E2E946700F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/EditPreset.nib; sourceTree = SOURCE_ROOT; };
-		E4DA174A1E2E946700F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Flurry.nib; sourceTree = SOURCE_ROOT; };
-		E4DA174C1E2E946700F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		E4DA174C1E2E946700F80879 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		E4DA17731E2E9F1400F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/EditPreset.xib; sourceTree = SOURCE_ROOT; };
+		E4DA17751E2E9F1400F80879 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Flurry.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +97,9 @@
 		E4DA17111E2E944C00F80879 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E4DA17471E2E946700F80879 /* EditPreset.nib */,
-				E4DA17491E2E946700F80879 /* Flurry.nib */,
+				E4DA17721E2E9F1400F80879 /* EditPreset.xib */,
+				E4DA17741E2E9F1400F80879 /* Flurry.xib */,
 				E4DA174B1E2E946700F80879 /* InfoPlist.strings */,
-				E4DA17121E2E944C00F80879 /* displays.tif */,
 				E4DA17131E2E944C00F80879 /* Flurry2.icns */,
 				E4DA17141E2E944C00F80879 /* Info.plist */,
 			);
@@ -237,10 +234,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4DA174D1E2E946700F80879 /* EditPreset.nib in Resources */,
-				E4DA17501E2E953400F80879 /* Flurry.nib in Resources */,
+				E4DA17761E2E9F1400F80879 /* EditPreset.xib in Resources */,
+				E4DA17771E2E9F1400F80879 /* Flurry.xib in Resources */,
 				E4DA17511E2E953400F80879 /* InfoPlist.strings in Resources */,
-				E4DA172E1E2E944C00F80879 /* displays.tif in Resources */,
 				E4DA172F1E2E944C00F80879 /* Flurry2.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,28 +264,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E4DA17471E2E946700F80879 /* EditPreset.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4DA17481E2E946700F80879 /* English */,
-			);
-			name = EditPreset.nib;
-			sourceTree = "<group>";
-		};
-		E4DA17491E2E946700F80879 /* Flurry.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4DA174A1E2E946700F80879 /* English */,
-			);
-			name = Flurry.nib;
-			sourceTree = "<group>";
-		};
 		E4DA174B1E2E946700F80879 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E4DA174C1E2E946700F80879 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E4DA17721E2E9F1400F80879 /* EditPreset.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DA17731E2E9F1400F80879 /* English */,
+			);
+			name = EditPreset.xib;
+			sourceTree = "<group>";
+		};
+		E4DA17741E2E9F1400F80879 /* Flurry.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DA17751E2E9F1400F80879 /* English */,
+			);
+			name = Flurry.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
