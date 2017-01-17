@@ -61,7 +61,6 @@
 		E4DF71000C8161E000573540 /* Texture.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Texture.c; sourceTree = "<group>"; };
 		E4DF71010C8161E000573540 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		E4DF71860C8163CF00573540 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = ../../../../System/Library/Frameworks/OpenGL.framework; sourceTree = "<group>"; };
-		E4DF71910C81653900573540 /* Flurry_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry_Prefix.pch; sourceTree = "<group>"; };
 		E4DF71CE0C81666C00573540 /* Flurry.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Flurry.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				E4DF70F10C8161E000573540 /* Source */,
-				E4DF71910C81653900573540 /* Flurry_Prefix.pch */,
 				E4DF70EB0C8161E000573540 /* FlurryUtils.h */,
 				E4DF70EC0C8161E000573540 /* FlurryUtils.m */,
 				E4DF70ED0C8161E000573540 /* FlurryView.h */,
@@ -196,9 +194,15 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = EF7AD73108BB986600CE4634 /* Build configuration list for PBXProject "Flurry" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Flurry */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -284,15 +288,11 @@
 		EF7AD72E08BB986600CE4634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Flurry_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = Flurry;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Debug;
@@ -300,16 +300,9 @@
 		EF7AD72F08BB986600CE4634 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Flurry_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = Flurry;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;
