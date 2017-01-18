@@ -80,7 +80,6 @@ extern global_info_t *info;
 
 #define kNumSpectrumEntries 512
 
-void OTSetup();
 double TimeInSecondsSinceStart();
 
 void GLSetupRC(void);

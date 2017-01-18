@@ -1,6 +1,6 @@
 #import <GLKit/GLKit.h>
 #import <OpenGL/gl.h>
-#include <sys/time.h>
+#include <chrono>
 #include <sys/sysctl.h>
 
 #include "Gl_saver.h"
@@ -14,18 +14,14 @@
 //long TimeFreq, TimeStart;
 global_info_t *info = NULL;
 
-
-// MDT The following few lines simulate the ppc-specific time stuff above.
-double CurrentTime(void);
-
-static double gTimeCounter = 0.0;
-void OTSetup (void) {
-    if (gTimeCounter == 0.0) {
-        gTimeCounter = CurrentTime();
-    }
-}
-double TimeInSecondsSinceStart (void) {
-    return CurrentTime() - gTimeCounter;
+double TimeInSecondsSinceStart (void)
+{
+    static auto start = std::chrono::high_resolution_clock::now();
+    
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start;
+    
+    return diff.count();
 }
 
 // MDT see:
@@ -33,7 +29,6 @@ double TimeInSecondsSinceStart (void) {
 static Boolean IsAltiVecAvailable( void )
 {
     return FALSE;
-
 }
 
 //////////////////////////////////////////////////////////////////

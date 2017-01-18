@@ -7,15 +7,6 @@
 //#define GL_DONE  [[_glView openGLContext] flushBuffer]
 #define GL_DONE  glFlush()
 
-__private_extern__ double CurrentTime(void)
-{
-    struct timeval time;
-    
-    gettimeofday(&time, NULL);
-    
-    return time.tv_sec + (time.tv_usec / 1000000.0); 
-}
-
 @implementation FlurryView
 
 - (id)initWithFrame:(NSRect)frameRect isPreview:(BOOL) preview
@@ -37,8 +28,6 @@ __private_extern__ double CurrentTime(void)
         [self addSubview:_glView];
 		
 		garbageHack = YES;
-        
-        OTSetup();
         
         presetManager = [[PresetManager alloc] init];
         
