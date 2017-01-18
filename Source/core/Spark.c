@@ -5,7 +5,7 @@
 #include "Std.h"
 #include "Spark.h"
 
-__private_extern__ void InitSpark(Spark *s)
+void InitSpark(Spark *s)
 {
 	int i;
 	for (i=0;i<3;i++)
@@ -14,7 +14,7 @@ __private_extern__ void InitSpark(Spark *s)
 	}
 }
 
-__private_extern__ void DrawSpark(Spark *s)
+void DrawSpark(Spark *s)
 {
 	const float black[4] = {0.0f,0.0f,0.0f,1.0f};
 	float width,sx,sy;
@@ -61,7 +61,7 @@ __private_extern__ void DrawSpark(Spark *s)
 #define BIGMYSTERY 1800.0
 #define MAXANGLES 16384
 
-__private_extern__ void UpdateSparkColour(Spark *s)
+void UpdateSparkColour(Spark *s)
 {
 	const float rotationsPerSecond = (float) (2.0*PI*fieldSpeed/MAXANGLES);
 	double thisPointInRadians;
@@ -141,7 +141,7 @@ __private_extern__ void UpdateSparkColour(Spark *s)
 	s->color[2] = baseBlue + 0.0625f * (0.5f + (float) cos((37.0 * (thisPointInRadians + thisAngle))));
 }
 
-__private_extern__ void UpdateSpark(Spark *s)
+void UpdateSpark(Spark *s)
 {
     const float rotationsPerSecond = (float) (2.0*PI*fieldSpeed/MAXANGLES);
     double thisPointInRadians;

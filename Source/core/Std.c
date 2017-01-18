@@ -2,7 +2,7 @@
 
 #include "Std.h"
 
-__private_extern__ float FastDistance2D(float x, float y)
+float FastDistance2D(float x, float y)
 {
 	// this function computes the distance from 0,0 to x,y with ~3.5% error
 	float mn;

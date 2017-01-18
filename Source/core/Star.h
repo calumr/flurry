@@ -13,8 +13,8 @@ typedef struct Star
 	float rotSpeed;
 } Star;
 
-__private_extern__ void UpdateStar(Star *s);
-__private_extern__ void DrawStar(Star *s);
-__private_extern__ void InitStar(Star *s);
+void UpdateStar(Star *s);
+void DrawStar(Star *s);
+void InitStar(Star *s);
 
 #endif // !defined(STAR_H)

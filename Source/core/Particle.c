@@ -8,7 +8,7 @@
 extern int theTexture;
 
 
-__private_extern__ void DrawParticle(Particle *p) // the math was easier in 2D - so 2D it is
+void DrawParticle(Particle *p) // the math was easier in 2D - so 2D it is
 {
     float screenx = (p->x * info->sys_glWidth / p->z) + info->sys_glWidth * 0.5f;
     float screeny = (p->y * info->sys_glWidth / p->z) + info->sys_glHeight * 0.5f;
@@ -109,7 +109,7 @@ __private_extern__ void DrawParticle(Particle *p) // the math was easier in 2D -
     }
 }
 
-__private_extern__ void UpdateParticle(Particle *p)
+void UpdateParticle(Particle *p)
 {
 	p->oldx = p->x;
 	p->oldy = p->y;
@@ -120,7 +120,7 @@ __private_extern__ void UpdateParticle(Particle *p)
 	p->z += p->deltaz*info->fDeltaTime;
 }
 
-__private_extern__ void InitParticle(Particle *p)
+void InitParticle(Particle *p)
 {
 //	float tempx,tempy;
 	int r1,r2;

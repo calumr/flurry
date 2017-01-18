@@ -23,10 +23,10 @@ typedef struct SmokeV
 	float seraphimTextures[NUMSMOKEPARTICLES*2*4];
 } SmokeV;
 
-__private_extern__ void InitSmoke(SmokeV *s);
+void InitSmoke(SmokeV *s);
 
-__private_extern__ void UpdateSmoke_ScalarBase(SmokeV *s);
+void UpdateSmoke_ScalarBase(SmokeV *s);
 
-__private_extern__ void DrawSmoke_Scalar(SmokeV *s);
+void DrawSmoke_Scalar(SmokeV *s);
 
 #endif // !defined(SMOKE_H)

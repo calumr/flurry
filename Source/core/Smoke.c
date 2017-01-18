@@ -12,7 +12,7 @@
 
 #define intensity 75000.0f;
 
-__private_extern__ void InitSmoke(SmokeV *s)
+void InitSmoke(SmokeV *s)
 {
     int i;
     s->nextParticle = 0;
@@ -25,7 +25,7 @@ __private_extern__ void InitSmoke(SmokeV *s)
     }
 }
 
-__private_extern__ void UpdateSmoke_ScalarBase(SmokeV *s)
+void UpdateSmoke_ScalarBase(SmokeV *s)
 {
     int i,j,k;
     float sx = info->star->position[0];
@@ -167,7 +167,7 @@ __private_extern__ void UpdateSmoke_ScalarBase(SmokeV *s)
     }
 }
 
-__private_extern__ void DrawSmoke_Scalar(SmokeV *s)
+void DrawSmoke_Scalar(SmokeV *s)
 {
 	int svi = 0;
 	int sci = 0;

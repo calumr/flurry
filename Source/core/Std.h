@@ -14,7 +14,7 @@
 #include "PTypes.h"
 #include "Gl_saver.h"
 
-__private_extern__ float FastDistance2D(float x, float y);
+float FastDistance2D(float x, float y);
 
 #define RandFlt(min, max) (min + (max - min) * rand() / (float) RAND_MAX)
 

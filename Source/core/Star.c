@@ -9,7 +9,7 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-__private_extern__ void InitStar(Star *s)
+void InitStar(Star *s)
 {
     int i;
     for (i=0;i<3;i++) {
@@ -19,7 +19,7 @@ __private_extern__ void InitStar(Star *s)
     s->mystery = RandFlt(0.0, 10.0);
 }
 
-__private_extern__ void DrawStar(Star *s)
+void DrawStar(Star *s)
 {
     float width,sx,sy;
     float w,z;
@@ -76,7 +76,7 @@ __private_extern__ void DrawStar(Star *s)
 #define BIGMYSTERY 1800.0
 #define MAXANGLES 16384
 
-__private_extern__ void UpdateStar(Star *s)
+void UpdateStar(Star *s)
 {
     float rotationsPerSecond = (float) (2.0*PI*12.0/MAXANGLES) * s->rotSpeed /* speed control */;
     double thisPointInRadians;

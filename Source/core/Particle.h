@@ -23,8 +23,8 @@ typedef struct Particle
 	int animFrame;
 } Particle;
 
-__private_extern__ void InitParticle(Particle *p);
-__private_extern__ void UpdateParticle(Particle *p);
-__private_extern__ void DrawParticle(Particle *p);
+void InitParticle(Particle *p);
+void UpdateParticle(Particle *p);
+void DrawParticle(Particle *p);
 
 #endif // !defined(PARTICLE_H)

@@ -13,9 +13,9 @@ typedef struct Spark
     float color[4];    
 } Spark;
 
-__private_extern__ void UpdateSparkColour(Spark *s);
-__private_extern__ void InitSpark(Spark *s);
-__private_extern__ void UpdateSpark(Spark *s);
-__private_extern__ void DrawSpark(Spark *s);
+void UpdateSparkColour(Spark *s);
+void InitSpark(Spark *s);
+void UpdateSpark(Spark *s);
+void DrawSpark(Spark *s);
 
 #endif // !defined(SPARK_H)
