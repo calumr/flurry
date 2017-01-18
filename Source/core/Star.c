@@ -19,60 +19,6 @@ void InitStar(Star *s)
     s->mystery = RandFlt(0.0, 10.0);
 }
 
-void DrawStar(Star *s)
-{
-    float width,sx,sy;
-    float w,z;
-    float screenx;
-    float screeny;
-    float scale;
-    float a;
-    float c = 0.08f;
-    float r,g,b;
-    int k;
-    
-    const float black[4] = {0.0f,0.0f,0.0f,1.0f};
-
-    if(s->ate == false) {
-        return;
-    }
-
-    width = 50000.0f * info->sys_glWidth / 1024.0f;
-    
-    z = s->position[2];
-    sx = s->position[0] * info->sys_glWidth / z + info->sys_glWidth * 0.5f;
-    sy = s->position[1] * info->sys_glWidth / z + info->sys_glHeight * 0.5f;
-    w = width*4.0f / z;
-    
-    screenx = sx;
-    screeny = sy;
-    
-    glPushMatrix();
-    glTranslatef(screenx,screeny,0.0f);
-    scale = w/100.0f;
-    glScalef(scale,scale,0.0f);
-    for (k=0;k<30;k++) {
-        a = ((float) (rand() % 3600)) / 10.0f;
-        glRotatef(a,0.0f,0.0f,1.0f);
-        glBegin(GL_QUAD_STRIP);
-        glColor4fv(black);
-        glVertex2f(-3.0f,0.0f);
-        a = 3.0f + (float) (rand() & 2047) * c;
-        glVertex2f(-3.0f,a);
-        r = 0.125f + (float) (rand() % 875) / 1000.0f;
-        g = 0.125f + (float) (rand() % 875) / 1000.0f;
-        b = 0.125f + (float) (rand() % 875) / 1000.0f;
-        glColor4f(r,g,b,1.0f);
-        glVertex2f(0.0f,0.0f);
-        glColor4fv(black);
-        glVertex2f(0.0f,a);
-        glVertex2f(3.0f,0.0f);
-        glVertex2f(3.0f,a);
-        glEnd();
-    }
-    glPopMatrix();
-}
-
 #define BIGMYSTERY 1800.0
 #define MAXANGLES 16384
 

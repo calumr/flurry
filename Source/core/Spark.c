@@ -14,50 +14,6 @@ void InitSpark(Spark *s)
 	}
 }
 
-void DrawSpark(Spark *s)
-{
-	const float black[4] = {0.0f,0.0f,0.0f,1.0f};
-	float width,sx,sy;
-	float a;
-	float c = 0.0625f;
-	float screenx;
-	float screeny;
-	float w,z, scale;
-	int k;
-	width = 60000.0f * info->sys_glWidth / 1024.0f;
-	
-	z = s->position[2];
-	sx = s->position[0] * info->sys_glWidth / z + info->sys_glWidth * 0.5f;
-	sy = s->position[1] * info->sys_glWidth / z + info->sys_glHeight * 0.5f;
-	w = width*4.0f / z;
-	
-	screenx = sx;
-	screeny = sy;
-	
-	glPushMatrix();
-	glTranslatef(screenx,screeny,0.0f);
-	scale = w/50.0f;
-	glScalef(scale,scale,0.0f);
-	for (k=0;k<12;k++)
-	{
-		a = ((float) (rand() % 3600)) / 10.0f;
-		glRotatef(a,0.0f,0.0f,1.0f);
-		glBegin(GL_QUAD_STRIP);
-		glColor4fv(black);
-		glVertex2f(-3.0f,0.0f);
-		a = 2.0f + (float) (rand() & 255) * c;
-		glVertex2f(-3.0f,a);
-		glColor4fv(s->color);
-		glVertex2f(0.0f,0.0f);
-		glColor4fv(black);
-		glVertex2f(0.0f,a);
-		glVertex2f(3.0f,0.0f);
-		glVertex2f(3.0f,a);
-		glEnd();
-	}
-	glPopMatrix();
-}
-
 #define BIGMYSTERY 1800.0
 #define MAXANGLES 16384
 

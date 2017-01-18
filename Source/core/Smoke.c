@@ -272,13 +272,6 @@ void DrawSmoke_Scalar(SmokeV *s)
 				cmv.f[2] = s->p[i].color[2].f[k]*cm;
 				cmv.f[3] = s->p[i].color[3].f[k]*cm;
 
-#if 0
-                                // MDT we can't use vectors in the Scalar routine
-                                s->seraphimColors[sci++].v = cmv.v;
-                                s->seraphimColors[sci++].v = cmv.v;
-                                s->seraphimColors[sci++].v = cmv.v;
-                                s->seraphimColors[sci++].v = cmv.v;
-#else
                                 {
                                     int ii, jj;
                                     for (jj = 0; jj < 4; jj++) {
@@ -288,7 +281,6 @@ void DrawSmoke_Scalar(SmokeV *s)
                                         sci += 1;
                                     }
                                 }
-#endif //0
                                 
                                 s->seraphimTextures[sti++] = u0;
                                 s->seraphimTextures[sti++] = v0;
