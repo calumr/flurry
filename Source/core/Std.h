@@ -16,8 +16,9 @@
 
 float FastDistance2D(float x, float y);
 
-#define RandFlt(min, max) (min + (max - min) * rand() / (float) RAND_MAX)
+#define RandFlt(min, max) (min + (max - min) * rand() / (float)RAND_MAX)
 
-#define RandBell(scale) (scale * (1.0f - (rand() + rand() + rand()) / ((float) RAND_MAX * 1.5f)))
+#define RandBell(scale) \
+    (scale * (1.0f - (rand() + rand() + rand()) / ((float)RAND_MAX * 1.5f)))
 
-#endif // _STD_h_
+#endif  // _STD_h_

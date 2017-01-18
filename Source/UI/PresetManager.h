@@ -1,13 +1,12 @@
 #import <Cocoa/Cocoa.h>
 #import "FlurryUtils.h"
 
-@interface PresetManager : NSObject
-{
-    NSMutableArray *presets;
-	FlurryPreset *viewPreset;
+@interface PresetManager : NSObject {
+    NSMutableArray* presets;
+    FlurryPreset* viewPreset;
 }
 
 - (void)selectRandomPresetToView;
 
-- (FlurryPreset *)viewPreset;
+- (FlurryPreset*)viewPreset;
 @end
