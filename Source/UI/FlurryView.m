@@ -18,13 +18,6 @@ __private_extern__ double CurrentTime(void)
 
 @implementation FlurryView
 
-+ (void)initialize
-{
-	OTSetup();	// Timer for animation
-	
-	srand((int)[NSDate timeIntervalSinceReferenceDate]);
-}
-
 - (id)initWithFrame:(NSRect)frameRect isPreview:(BOOL) preview
 {
     if (self = [super initWithFrame:frameRect isPreview:preview])
@@ -45,13 +38,12 @@ __private_extern__ double CurrentTime(void)
 		
 		garbageHack = YES;
         
+        OTSetup();
+        
         presetManager = [[PresetManager alloc] init];
-        [presetManager setTarget:self];
         
         randomisePreset = [[ScreenSaverDefaults defaultsForModuleWithName:@"Flurry"] 
             boolForKey:RANDOM_PRESET_KEY];
-        randomiseDisplay = [[ScreenSaverDefaults defaultsForModuleWithName:@"Flurry"] 
-        	boolForKey:RANDOM_DISPLAY_KEY];
     }
 	
     return self;
@@ -96,14 +88,9 @@ __private_extern__ double CurrentTime(void)
     {
         Flurry *flurry = [[[presetManager viewPreset] flurries] objectAtIndex:i];
         
-        [flurry randomiseDisplays:randomiseDisplay];
-        
-        if ([flurry shouldDrawInView:_glView randomise:randomiseDisplay])
-        {
-            info = [flurry info];
-            GLResize([_glView frame].size.width, [_glView frame].size.height);
-            GLSetupRC();
-        }
+        info = [flurry info];
+        GLResize([_glView frame].size.width, [_glView frame].size.height);
+        GLSetupRC();
     }
 	
 	garbageHack = YES;
@@ -145,13 +132,11 @@ __private_extern__ double CurrentTime(void)
 	for (i=0;i<[[[presetManager viewPreset] flurries] count];i++)
 	{
 		Flurry *flurry = [[[presetManager viewPreset] flurries] objectAtIndex:i];
-		if ([flurry shouldDrawInView:_glView randomise:randomiseDisplay])
-		{
-			info = [flurry info];
-			hasDrawn = YES;
-			GLResize([_glView frame].size.width, [_glView frame].size.height);
-			GLRenderScene();
-		}
+		
+        info = [flurry info];
+        hasDrawn = YES;
+        GLResize([_glView frame].size.width, [_glView frame].size.height);
+        GLRenderScene();
 	}
 	
 	if (hasDrawn)
@@ -162,246 +147,17 @@ __private_extern__ double CurrentTime(void)
 
 - (void)stopAnimation
 {
-    [self writeDefaults];	// need to save changes caused by key presses
     [super stopAnimation];
 }
 
-- (BOOL) hasConfigureSheet
+- (BOOL)hasConfigureSheet
 {
-    return YES;
+    return NO;
 }
 
 - (NSWindow*)configureSheet
 {
-	[[NSBundle mainBundle] loadNibNamed:@"Flurry.nib" owner:self topLevelObjects:nil];
-	
-	if (randomisePreset)
-	{
-		[randomPresetCheckbox setState:NSOnState];
-		[randomDisplayCheckbox setEnabled:YES];
-	}
-	else
-	{
-		[randomPresetCheckbox setState:NSOffState];
-		[randomDisplayCheckbox setEnabled:NO];
-	}
-	
-	[randomDisplayCheckbox setState:randomiseDisplay ? NSOnState : NSOffState];
-	
-	[[presetManager popupButton] setFrame:[presetMenuSpace frame]];
-	
-	[[[flurryTable window] contentView] replaceSubview:presetMenuSpace with:[presetManager popupButton]];
-	
-	[flurryTable setDataSource:self];
-	[flurryTable setDelegate:self];
-	
-	[self tableViewSelectionDidChange:NULL];
-	
-	[[flurryTable tableColumnWithIdentifier:@"colour"] setDataCell:[[ColourCell alloc] init]];
-	
-	[flurryTable sizeLastColumnToFit];
-	
-	tableRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:COLOUR_REFRESH_INTERVAL
-							target:self
-							selector:@selector(refreshColours:)
-							userInfo:NULL repeats:YES];
-	
-    return window;
-}
-
-- (void)refreshColours:(NSTimer *)timer
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_COLOUR_NOTIF object:NULL];
-	[flurryTable setNeedsDisplay:YES];
-}
-
-- (IBAction)displayReadMe:(id)sender
-{
-	[[NSWorkspace sharedWorkspace] openFile:
-		[[NSBundle bundleForClass:[FlurryView class]] pathForResource:@"readme" ofType:@"rtfd"]];
-}
-
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
-{
-	return [presetManager handleEvent:theEvent];
-}
-
-- (void)selectedPresetDidChange
-{
-	if (flurryTable)
-	{
-		[flurryTable selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-		[self tableViewSelectionDidChange:NULL];
-	}
-	[self stopAnimation];
-	[self startAnimation];
-}
-
-- (IBAction)somethingChanged:(id)sender
-{
-	int i;
-	for (i=0;i<[[[presetManager currentPreset] flurries] count];i++)
-	{
-		if ([flurryTable isRowSelected:i])
-		{
-			info = [[[[presetManager currentPreset] flurries] objectAtIndex:i] info];
-			if (sender == colourMenu || sender == NULL)
-			{
-				info->currentColorMode = (ColorModes)[colourMenu indexOfSelectedItem];
-			}
-			else if (sender == streamCountSlider || sender == NULL)
-				info->numStreams = [streamCountSlider intValue];
-			else if (sender == speedSlider || sender == NULL)
-				info->star->rotSpeed = [speedSlider floatValue];
-			else if (sender == thicknessSlider || sender == NULL)
-			{
-				info->streamExpansion = [thicknessSlider floatValue];
-				info->streamExpansion *= info->streamExpansion;
-			}
-		}
-	}
-	
-	randomisePreset = [randomPresetCheckbox state] == NSOnState;
-	if (!randomisePreset)
-		[presetManager setViewPresetToCurrent];
-	[randomDisplayCheckbox setEnabled:randomisePreset];
-	randomiseDisplay = [randomDisplayCheckbox state] == NSOnState;
-	
-	[flurryTable reloadData];
-}
-
-- (IBAction)addFlurry:(id)sender
-{
-	int i;
-	BOOL added = NO;
-	NSMutableArray *newFlurries = [[NSMutableArray alloc] init];
-	
-	for (i=0;i<[[[presetManager currentPreset] flurries] count];i++)
-	{
-		if ([flurryTable isRowSelected:i])
-		{
-			added = YES;
-			[newFlurries addObject:[[[[presetManager currentPreset] flurries] objectAtIndex:i] copy]];
-		}
-	}
-	
-	if (!added)
-		[newFlurries addObject:[FlurryPreset classicFlurryPreset]];
-	
-	for (i=0;i<[newFlurries count];i++)
-		[[presetManager currentPreset] addFlurry:[newFlurries objectAtIndex:i]];
-	
-	[flurryTable reloadData];
-}
-
-- (IBAction)deleteFlurry:(id)sender
-{
-	if ([flurryTable numberOfSelectedRows] < [[[presetManager currentPreset] flurries] count])
-	{
-		int i;
-		NSMutableArray *toDelete = [[NSMutableArray alloc] init];
-		
-		for (i=0;i<[[[presetManager currentPreset] flurries] count];i++)
-		{
-			if ([flurryTable isRowSelected:i])
-			{
-				[toDelete addObject:[[[presetManager currentPreset] flurries] objectAtIndex:i]];
-			}
-		}
-		
-		for (i=0;i<[toDelete count];i++)
-			[[presetManager currentPreset] deleteFlurry:[toDelete objectAtIndex:i]];
-		
-		[flurryTable reloadData];
-		[self tableViewSelectionDidChange:nil];
-	}
-	else
-		NSBeep();
-}
-
-- (void)writeDefaults
-{
-	NSUserDefaults *defaults = [ScreenSaverDefaults defaultsForModuleWithName:@"Flurry"];
-	
-	[defaults setBool:randomisePreset forKey:RANDOM_PRESET_KEY];
-	[defaults setBool:randomiseDisplay forKey:RANDOM_DISPLAY_KEY];
-	
-	[defaults synchronize];
-	
-	[presetManager writeDefaults];	// must do this afterwards in case we overwrite
-}
-
-- (IBAction)testNow:(id)sender
-{
-	NSUserDefaults *defaults;
-	
-	[presetManager setViewPresetToCurrent];
-	[self writeDefaults];
-	
-	defaults = [ScreenSaverDefaults defaultsForModuleWithName:@"Flurry"];	
-	// so we can test the preset we are editing, and ignore random
-	// presets being used
-	
-	[defaults setBool:NO forKey:RANDOM_PRESET_KEY];
-	[defaults setBool:NO forKey:RANDOM_DISPLAY_KEY];
-	
-	[defaults synchronize];
-	
-	[[NSWorkspace sharedWorkspace] launchApplication:@"ScreenSaverEngine"];
-}
-
-- (IBAction)saveAndCloseSheet:(id)sender
-{
-	[[self window] makeFirstResponder:nil];
-	[tableRefreshTimer invalidate];
-	[self writeDefaults];
-	[NSApp endSheet:window];
-}
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
-{
-	return [[[presetManager currentPreset] flurries] count];
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
-	Flurry *flurry;
-	
-	NSParameterAssert(row >= 0 && row < [[[presetManager currentPreset] flurries] count]);
-	
-	flurry = [[[presetManager currentPreset] flurries] objectAtIndex:row];
-	
-    return [flurry valueForKey:[tableColumn identifier]];
-}
-
-- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
-	Flurry *flurry;
-
-	NSParameterAssert(row >= 0 && row < [[[presetManager currentPreset] flurries] count]);
-	
-	flurry = [[[presetManager currentPreset] flurries] objectAtIndex:row];
-	
-	[flurry setValue:object forKey:[tableColumn identifier]];
-}
-
-- (void)tableViewSelectionDidChange:(NSNotification *)notification
-{
-	NSInteger selection = [flurryTable selectedRow];
-	
-	NSParameterAssert(selection >= 0 && selection < [[[presetManager currentPreset] flurries] count]);
-	
-	if ([flurryTable numberOfSelectedRows])
-	{
-		Flurry *flurry = [[[presetManager currentPreset] flurries] objectAtIndex:selection];
-		
-		info = [flurry info];
-		
-		[colourMenu selectItemAtIndex:info->currentColorMode];
-		[streamCountSlider setIntValue:info->numStreams];
-		[thicknessSlider setFloatValue:sqrt(info->streamExpansion)];
-		[speedSlider setFloatValue:info->star->rotSpeed];
-	}
+    return nil;
 }
 
 @end
