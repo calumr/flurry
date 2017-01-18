@@ -24,13 +24,6 @@ double TimeInSecondsSinceStart (void)
     return diff.count();
 }
 
-// MDT see:
-// http://developer.apple.com/hardware/ve/g3_compatibility.html
-static Boolean IsAltiVecAvailable( void )
-{
-    return FALSE;
-}
-
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 // Do any initialization of the rendering context here, such as
@@ -87,8 +80,6 @@ void GLSetupRC(void)
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     
     info->fOldTime = TimeInSecondsSinceStart() + info->flurryRandomSeed;
-
-    info->optMode = IsAltiVecAvailable() ? OPT_MODE_VECTOR_UNROLLED : OPT_MODE_SCALAR_BASE;
 }
 
 //////////////////////////////////////////////////////////////////
@@ -115,44 +106,12 @@ void GLRenderScene(void)
         UpdateSpark(info->spark[i]);
     }
     
-    switch(info->optMode) {
-    case OPT_MODE_SCALAR_BASE:
-        UpdateSmoke_ScalarBase(info->s);
-        break;
-#ifdef __ppc__
-    case OPT_MODE_SCALAR_FRSQRTE:
-        UpdateSmoke_ScalarFrsqrte(info->s);
-        break;
-#endif //__ppc__
-#ifdef __VEC__
-    case OPT_MODE_VECTOR_SIMPLE:
-        UpdateSmoke_VectorBase(info->s);
-        break;
-    case OPT_MODE_VECTOR_UNROLLED:
-        UpdateSmoke_VectorUnrolled(info->s);
-        break;
-#endif //__VEC__
-    default:
-        break;
-    }
+    UpdateSmoke_ScalarBase(info->s);
     
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
     glEnable(GL_TEXTURE_2D);
     
-    switch(info->optMode) {
-    case OPT_MODE_SCALAR_BASE:
-    case OPT_MODE_SCALAR_FRSQRTE:
-        DrawSmoke_Scalar(info->s);
-        break;
-#ifdef __VEC__
-    case OPT_MODE_VECTOR_SIMPLE:
-    case OPT_MODE_VECTOR_UNROLLED:
-		DrawSmoke_Vector(info->s);
-        break;
-#endif //__VEC__
-    default:
-        break;
-    }    
+    DrawSmoke_Scalar(info->s);
     
     glDisable(GL_TEXTURE_2D);
 }

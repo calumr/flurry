@@ -8,11 +8,6 @@
 #include "Particle.h"
 #include "Std.h"
 
-#define OPT_MODE_SCALAR_BASE		0x0
-#define OPT_MODE_SCALAR_FRSQRTE		0x1
-#define OPT_MODE_VECTOR_SIMPLE		0x2
-#define OPT_MODE_VECTOR_UNROLLED	0x3
-
 typedef enum _ColorModes
 {
 	redColorMode = 0,
@@ -72,8 +67,6 @@ typedef struct global_info_t {
 	SmokeV *s;
 	Star *star;
 	Spark *spark[64];
-
-        int optMode;
 } global_info_t;
 
 extern global_info_t *info;
