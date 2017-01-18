@@ -58,7 +58,7 @@ void DrawParticle(Particle *p) // the math was easier in 2D - so 2D it is
     {
         float dx = (screenx-oldscreenx);
         float dy = (screeny-oldscreeny);
-        float m = FastDistance2D(dx, dy);
+        float m;
         float u0 = (p->animFrame) * 0.125f;
         float v0 = (p->animFrame>>3) * 0.125f;
         float u1 = u0 + 0.125f;

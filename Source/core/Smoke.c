@@ -260,8 +260,6 @@ void DrawSmoke_Scalar(SmokeV *s)
 				v0 = (s->p[i].animFrame.i[k]>>3) * 0.125f;
 				u1 = u0 + 0.125f;
 				v1 = v0 + 0.125f;
-				u1 = u0 + 0.125f;
-				v1 = v0 + 0.125f;
 				cm = (1.375f - thisWidth/width);
 				if (s->p[i].dead.i[k] == 3)
 				{

@@ -66,7 +66,6 @@ void UpdateSparkColour(Spark *s)
 	const float rotationsPerSecond = (float) (2.0*PI*fieldSpeed/MAXANGLES);
 	double thisPointInRadians;
 	double thisAngle = info->fTime*rotationsPerSecond;
-	float cf;
 	float cycleTime = 20.0f;
 	float colorRot;
 	float redPhaseShift;
@@ -97,7 +96,6 @@ void UpdateSparkColour(Spark *s)
 	redPhaseShift = 0.0f; //cycleTime * 0.0f / 3.0f 
 	greenPhaseShift = cycleTime / 3.0f; 
 	bluePhaseShift = cycleTime * 2.0f / 3.0f ;
-	colorTime = info->fTime;
 	if (info->currentColorMode == whiteColorMode)
 	{
 		baseRed = 0.1875f;
@@ -130,10 +128,7 @@ void UpdateSparkColour(Spark *s)
 		baseGreen = 0.109375f * ((float) cos((colorTime+greenPhaseShift)*colorRot)+1.0f);
 		baseBlue = 0.109375f * ((float) cos((colorTime+bluePhaseShift)*colorRot)+1.0f);
 	}
-	
-	cf = ((float) (cos(7.0*((info->fTime)*rotationsPerSecond))+cos(3.0*((info->fTime)*rotationsPerSecond))+cos(13.0*((info->fTime)*rotationsPerSecond))));
-	cf /= 6.0f;
-	cf += 2.0f;
+
 	thisPointInRadians = 2.0 * PI * (double) s->mystery / (double) BIGMYSTERY;
 	
 	s->color[0] = baseRed + 0.0625f * (0.5f + (float) cos((15.0 * (thisPointInRadians + 3.0*thisAngle))) + (float) sin((7.0 * (thisPointInRadians + thisAngle))));
@@ -180,7 +175,6 @@ void UpdateSpark(Spark *s)
     redPhaseShift = 0.0f; //cycleTime * 0.0f / 3.0f 
     greenPhaseShift = cycleTime / 3.0f; 
     bluePhaseShift = cycleTime * 2.0f / 3.0f ;
-    colorTime = info->fTime;
     if (info->currentColorMode == whiteColorMode) {
         baseRed = 0.1875f;
         baseGreen = 0.1875f;
